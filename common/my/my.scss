@@ -1,0 +1,36 @@
+.my-page {
+	padding-top: 160rpx;
+	height: 100vh;
+	background-color: #ffffff;
+	z-index:99999;
+	.user-box {
+		padding: 60rpx 32rpx;
+		background-color: #ffffff;
+		.user-img {
+			width: 120rpx;
+			height: 120rpx;
+			border-radius: 50%;
+		}
+	}
+	
+	.list {
+		background-color: #ffffff;
+		.list-item {
+			padding: 32rpx;
+			border-bottom: 1px solid #f4f4f4;
+			.list-name {
+				display: flex;
+				align-items: center;
+				.left-img {
+					margin-right: 20rpx;
+					width: 40rpx;
+					height: 40rpx;
+				}
+			}
+		}
+		.share {
+			padding: 8rpx 32rpx;
+			background-color: #ffffff;
+		}
+	}
+}

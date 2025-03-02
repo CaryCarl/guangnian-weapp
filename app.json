@@ -1,0 +1,52 @@
+{
+	"pages": [
+		"pages/index/index",
+		"pages/specs/specs",
+		"pages/qrcode/qrcode"
+	],
+	"lazyCodeLoading": "requiredComponents",
+	"subPackages": [],
+	"window": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "",
+		"navigationBarBackgroundColor": "#ffffff",
+		"backgroundColor": "#ffffff"
+	},
+	"tabBar": {
+		"borderStyle": "white",
+		"color": "#c4c4c4",
+		"height": "80rpx",
+		"fontSize": "22px",
+		"selectedColor": "#951fff",
+		"backgroundColor": "#ffffff",
+		"list": [{
+			"pagePath": "pages/index/index",
+			"text": "首页",
+			"selectedIconPath": "/static/tabbar/juchang-active.png",
+			"iconPath": "/static/tabbar/juchang.png"
+		}, {
+			"pagePath": "pages/specs/specs",
+			"text": "规格",
+			"selectedIconPath": "/static/tabbar/guige-active.png",
+			"iconPath": "/static/tabbar/guige.png"
+		}, {
+			"pagePath": "pages/find/find",
+			"text": "发现",
+			"selectedIconPath": "/static/tabbar/faxian-active.png",
+			"iconPath": "/static/tabbar/faxian.png"
+		}, {
+			"pagePath": "pages/my/my",
+			"text": "我的",
+			"selectedIconPath": "/static/tabbar/my-active.png",
+			"iconPath": "/static/tabbar/my.png"
+		}]
+	},
+	"lazyCodeLoading": "requiredComponents",
+	"permission": {},
+	"usingComponents": {
+		"recharge-template": "/common/rechargeTemplate/index",
+		"header-title": "/common/headerTitle/index",
+		"no-data": "/common/noData/index",
+		"my": "/common/my/index"
+	}
+}

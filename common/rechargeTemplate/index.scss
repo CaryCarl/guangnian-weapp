@@ -1,0 +1,78 @@
+.cz-main {
+    margin-left: 32rpx;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: calc(100% - 64rpx);
+    .effect-main {
+        margin-bottom: 30rpx;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        width: calc(50% - 22rpx);
+        height: 212rpx;
+        border-radius: 8px;
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        .subscript-tag {
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            display: inline-block;
+            padding: 0 12rpx 0 18rpx;
+            height: 44rpx;
+            line-height: 44rpx;
+            font-size: 24rpx;
+            border-radius: 0px 8px 0px 10px;
+        }
+        .effect-hand {
+            position: absolute;
+            z-index: 9;
+            bottom: -40rpx;
+            right: -30rpx;
+            width: 140rpx;
+            height: 110rpx;
+        }
+        .price {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            margin-top: 36rpx;
+            font-size: 48rpx;
+            font-weight: bold;
+            .yuan {
+                margin-left: 4rpx;
+                font-size: 28rpx;
+                font-weight: bold;
+            }
+        }
+        .remake {
+            font-size: 24rpx;
+            color: #888888;
+            >view {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+        .yhRemark {
+            position: absolute;
+            bottom: -2px;
+            left: -2px;
+            width: calc(100% + 4px);
+            height: 31px;
+            text-align: center;
+            line-height: 31px;
+            font-size: 28rpx;
+            border-radius: 0px 0px 8px 8px;
+        }
+        .vip-remake {
+            color: #f74338;
+            font-size: 24rpx;
+        }
+    }
+}
