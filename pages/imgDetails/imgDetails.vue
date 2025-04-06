@@ -1,5 +1,7 @@
 <template>
 	<view class="img-page">
+		<Header-Title :back="true" :title="current === 0?'':''"></Header-Title>
+		<Ball-Spin v-if="spinState"></Ball-Spin>
 		<swiper v-if="imageList.length > 0" class="swiper" :indicator-dots="false" :autoplay="false" :circular="false"
 			@change="onSwiperChange">
 			<swiper-item v-for="(item, i) in imageList" :key="i">
@@ -14,8 +16,9 @@
 
 		<view class="operate">
 			<img @click="downloadImage" class="xiazai" src="/static/img/xiazai.png" alt="" srcset="" />
-			<view class="mt20">
-				收藏
+			<view class="mt20 ">
+				<img v-if="collected" @click="toggleCollect(false)" class="shoucang" src="/static/img/shoucang-ac.png" alt="" srcset="" />
+				<img v-else @click="toggleCollect(true)" class="shoucang" src="/static/img/shoucang.png" alt="" srcset="" />
 			</view>
 		</view>
 	</view>
@@ -30,11 +33,13 @@
 				id: null,
 				imageList: [],
 				currentIndex: 0,
+				collected:false,
+				spinState: true
 			};
 		},
 		onLoad(options) {
-			console.log('options---', options);
 			this.id = options?.id || 1
+			this.isCollect()
 			this.getImgList(options?.id)
 		},
 		// onShareAppMessage() {
@@ -45,6 +50,36 @@
 		// 	}
 		// },
 		methods: {
+			onBack() {
+				
+			},
+			// 查询分组是否被收藏
+			isCollect() {
+				fetch(this.$api.checkCollection, {
+					group_id: Number(this.id)
+				}, 'post').then((res) => {
+					if(res?.data?.code === 200) {
+						this.collected = res?.data?.data.collected
+						
+						console.log('是否收藏', this.collected);
+					}
+				
+				})
+			},
+			toggleCollect(state) {
+				console.log('state---', state);
+				
+				
+				fetch(this.$api.toggleCollect, {
+					group_id: Number(this.id)
+				}, 'post').then((res) => {
+					console.log('收藏操作', res);
+					if(res?.data?.code === 200) {
+						this.collected =  res?.data?.data
+					}
+				})
+				
+			},
 			downloadImage() {
 				wx.showLoading({
 					title: '图片下载中',
@@ -130,17 +165,20 @@
 				this.currentIndex = event.detail.current;
 			},
 			getImgList(id) {
+				this.spinState = true
 				fetch(this.$api.getImageGroups, {
 					id
 				}, 'post').then((res) => {
 					if (res.data.code === 200) {
 						let temp = res.data?.data[0]?.images_url || []
-
 						this.imageList = temp
-
-						console.log('res--1-', this.imageList);
+						this.spinState = false
+					}else {
+						this.spinState = false
 					}
 
+				}).catch(err =>{
+					this.spinState = false
 				})
 			},
 		}

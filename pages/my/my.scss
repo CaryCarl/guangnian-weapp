@@ -1,5 +1,5 @@
 .my-page {
-	height: 100vh;
+	height: 100%;
 	background-color: #f4f4f4;
 	.user-box {
 		padding: 60rpx 32rpx;
@@ -10,9 +10,9 @@
 			border-radius: 50%;
 		}
 	}
-	
 	.list {
 		background-color: #ffffff;
+		border: 2px solid red;
 		.list-item {
 			padding: 32rpx;
 			border-bottom: 1px solid #f4f4f4;
@@ -25,10 +25,6 @@
 					height: 40rpx;
 				}
 			}
-		}
-		.share {
-			padding: 8rpx 32rpx;
-			background-color: #ffffff;
 		}
 	}
 }

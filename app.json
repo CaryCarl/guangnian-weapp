@@ -1,7 +1,6 @@
 {
 	"pages": [
 		"pages/index/index",
-		"pages/specs/specs",
 		"pages/qrcode/qrcode"
 	],
 	"lazyCodeLoading": "requiredComponents",
@@ -24,13 +23,13 @@
 			"text": "首页",
 			"selectedIconPath": "/static/tabbar/juchang-active.png",
 			"iconPath": "/static/tabbar/juchang.png"
+		},{
+			"pagePath": "pages/imgDetails/imgDetails",
+			"text": "发现",
+			"selectedIconPath": "/static/tabbar/faxian-active.png",
+			"iconPath": "/static/tabbar/faxian.png"
 		}, {
-			"pagePath": "pages/specs/specs",
-			"text": "规格",
-			"selectedIconPath": "/static/tabbar/guige-active.png",
-			"iconPath": "/static/tabbar/guige.png"
-		}, {
-			"pagePath": "pages/find/find",
+			"pagePath": "pages/qrcode/qrcode",
 			"text": "发现",
 			"selectedIconPath": "/static/tabbar/faxian-active.png",
 			"iconPath": "/static/tabbar/faxian.png"

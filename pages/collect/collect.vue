@@ -1,0 +1,80 @@
+<template>
+	<view class="collect-page">
+		<Ball-Spin v-if="spinState"></Ball-Spin>
+		<view class="grid-size qz-fl-sb-wrap" v-if="list.length > 0">
+			<view class="jq-row mb32" v-for="(item,i) in list" :key="i" @click="onImg(item)">
+				<image class="jq-img" mode="aspectFill" :src="item.cover_image"></image>
+			</view>
+		</view>
+		<view v-else>
+			暂无数据
+		</view>
+	</view>
+</template>
+
+<script>
+	import {
+		fetch
+	} from '../../utils/fetch.js';
+	export default {
+		data() {
+			return {
+				spinState: true,
+				list: []
+			};
+		},
+
+		async onLoad(options) {
+			await this.$onLaunched;
+			this.getList()
+		},
+		methods: {
+			getList() {
+				this.spinState = true
+				fetch(this.$api.getUserCollections, {}, 'post').then((res) => {
+					if (res?.data?.code === 200) {
+						let temp = res?.data?.data || []
+						this.list = temp
+						this.spinState = false
+					} else {
+						this.spinState = false
+					}
+
+				}).catch(err => {
+					this.spinState = false
+				})
+			},
+			onImg(item) {
+				uni.navigateTo({
+					url: '/pages/imgDetails/imgDetails?id=' + item.id
+				})
+			},
+		}
+	}
+</script>
+
+<style lang="scss" scoped>
+	.collect-page {
+		padding: 32rpx;
+	}
+
+	.grid-size {
+		.jq-row {
+			position: relative;
+			width: calc(50% - 16rpx);
+			height: 500rpx;
+			border-radius: 12rpx;
+			overflow: hidden;
+			background-color: #ffffff;
+			box-shadow: 0 1px 4px rgba(0, 21, 41, .08);
+
+			.jq-img {
+				width: 100%;
+				height: 100%;
+				border-radius: 12rpx;
+				object-fit: cover;
+			}
+
+		}
+	}
+</style>

@@ -18,14 +18,13 @@
 		.list-item {
 			padding: 32rpx;
 			border-bottom: 1px solid #f4f4f4;
-			.list-name {
-				display: flex;
-				align-items: center;
-				.left-img {
-					margin-right: 20rpx;
-					width: 40rpx;
-					height: 40rpx;
-				}
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			.left-img {
+				margin-right: 20rpx;
+				width: 40rpx;
+				height: 40rpx;
 			}
 		}
 		.share {

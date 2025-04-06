@@ -10,22 +10,23 @@
 				"onReachBottomDistance": 150,
 				"navigationStyle": "custom"
 			}
-		},
-		{
-			"path": "pages/specs/specs",
-			"style": {
-				"navigationBarTitleText": "规格",
-				"onReachBottomDistance": 60,
-				"enablePullDownRefresh": false
-			}
-		}, {
-			"path": "pages/find/find",
+		},{
+			"path": "pages/qrcode/qrcode",
 			"style": {
 				"navigationBarTitleText": "发现",
-				"onReachBottomDistance": 60,
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"onReachBottomDistance": 150,
+				"navigationStyle": "custom"
 			}
 		}, {
+			"path": "pages/type/type",
+			"style": {
+				"navigationBarTitleText": "分类",
+				"enablePullDownRefresh": false,
+				"onReachBottomDistance": 150,
+				"navigationStyle": "custom"
+			}
+		},  {
 			"path": "pages/my/my",
 			"style": {
 				"navigationBarTitleText": "我的",
@@ -37,7 +38,15 @@
 			"path" : "pages/imgDetails/imgDetails",
 			"style" : 
 			{
-				"navigationBarTitleText" : ""
+				"navigationBarTitleText" : "",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path" : "pages/collect/collect",
+			"style" : 
+			{
+				"navigationBarTitleText" : "收藏"
 			}
 		}
 	],
@@ -61,12 +70,12 @@
 			"selectedIconPath": "/static/tabbar/home-active.png",
 			"iconPath": "/static/tabbar/home.png"
 		}, {
-			"pagePath": "pages/specs/specs",
-			"text": "规格",
-			"selectedIconPath": "/static/tabbar/guige-active.png",
-			"iconPath": "/static/tabbar/guige.png"
-		}, {
-			"pagePath": "pages/find/find",
+			"pagePath": "pages/type/type",
+			"text": "分类",
+			"selectedIconPath": "/static/tabbar/faxian-active.png",
+			"iconPath": "/static/tabbar/faxian.png"
+		},{
+			"pagePath": "pages/qrcode/qrcode",
 			"text": "发现",
 			"selectedIconPath": "/static/tabbar/faxian-active.png",
 			"iconPath": "/static/tabbar/faxian.png"

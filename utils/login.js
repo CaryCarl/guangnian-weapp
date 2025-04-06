@@ -8,27 +8,35 @@ export async function getCodeLogin(tfid, query) {
 	return new Promise((resolve, resject) => {
 		wx.login({
 			success: (res) => {
-				console.log('用户信息---', res);
-                if (res.code) {
-                    let data = {}
-                	let dataTemp = {
-                    	code: res.code,
-                    	userInfo: {},
-                    	scope: 'snsapi_base'
-                    }
-                    if(query) {
-                        if(JSON.stringify(query) !== "{}") {
-                            data = Object.assign(dataTemp, query)
-                        }
-                    }
-                    data = dataTemp
-                	fetch(api.getWxLogin, data, 'post',tfid || '').then(resLogin => {
-						console.log('登录信息---', resLogin);
-                		
-                	})
-                } else {
-                	console.log('登录失败！')
-                }
+				if (res.code) {
+					let data = {}
+					let dataTemp = {
+						code: res.code,
+						userInfo: {},
+						scope: 'snsapi_base'
+					}
+					if (query) {
+						if (JSON.stringify(query) !== "{}") {
+							data = Object.assign(dataTemp, query)
+						}
+					}
+					data = dataTemp
+					fetch(api.getWxLogin, data, 'post', tfid || '').then(resLogin => {
+
+						let info = resLogin?.data.data;
+						if(resLogin?.data.code === 200) {
+							console.log('登录信息---', info);
+							
+							uni.setStorageSync('userId', info.openid);
+							store.commit("setUserInfo", info);
+							resolve(resLogin)
+						}
+						
+						
+					})
+				} else {
+					console.log('登录失败！')
+				}
 			},
 			fail: resject
 		})

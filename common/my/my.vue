@@ -6,7 +6,10 @@
 		</view>
 
 		<view class="list mt32">
-			
+			<view class="list-item" @click="change()">
+				<text>收藏</text>
+				<image class="left-img mr32" src="@/static/img/you.png" />
+			</view>
 		</view>
 	</view>
 </template>

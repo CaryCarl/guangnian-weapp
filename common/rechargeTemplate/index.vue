@@ -64,7 +64,7 @@
         // box-shadow: 0px -3px 6px 1px rgba(230, 230, 230, 0.8196);
         border-top: 1px solid #eeeeee;
         .tab {
-            padding: 10rpx 0 24rpx 0;
+            padding: 10rpx 0 26rpx 0;
             display: flex;
             flex-direction: column;
             align-items: center;

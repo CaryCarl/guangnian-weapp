@@ -25,8 +25,7 @@ export default {
         };
         this.$store.commit('setXcxInfo', xcxInfo);
         // 用户登录
-        // await getCodeLogin();
-        getCodeLogin();
+        await getCodeLogin();
 		this.$isResolve()
     },
     async onShow() {

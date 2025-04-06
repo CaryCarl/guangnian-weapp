@@ -1,5 +1,5 @@
-// const baseUrl = 'http://192.168.201.12:3080';
-const baseUrl = 'https://www.imgadmin.juzishu.cn';
+const baseUrl = 'http://192.168.5.22:3080';
+// const baseUrl = 'https://www.imgadmin.juzishu.cn';
 
 import store from '../store'
 
@@ -30,6 +30,7 @@ let fetch = function(url, data = {}, method, tfid) {
 	
 	let header = {
 		"Content-Type": "application/json",
+		"x-wx-openid":store.getters.userInfo?.openid || uni.getStorageSync('userId') || ''
 	}
 	return new Promise((resolve, reject) => {
 		url = url.indexOf('http') !== -1 ? url : baseUrl + url
