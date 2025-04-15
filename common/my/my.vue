@@ -11,6 +11,15 @@
 				<image class="left-img mr32" src="@/static/img/you.png" />
 			</view>
 		</view>
+		
+		<view class="footer">
+			<view class="">
+				V1.0.6
+			</view>
+			<view class="f24 mt32">
+				小橘正在努力开发中~~~
+			</view>
+		</view>
 	</view>
 </template>
 

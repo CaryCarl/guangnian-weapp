@@ -11,7 +11,6 @@ export default {
 			topRpx: '35px',
 			menuButtonInfo,
 			isLoading: false,
-			noMoreData: false,
 			scrollTop: '',
 			swiperList: [{
 				imageUrl: 'https://qiezidj-resource.oss-cn-shenzhen.aliyuncs.com/images/d14b62a209f4440585e3f7442557331f.jpg',
@@ -34,12 +33,14 @@ export default {
 			isShow: 1,
 			featuredList: [],
 			current: 0,
-
+			flag: true,
 			queryData: {
 				pageNumber: 1,
 				pageSize: 12,
 				status: 1
-			}
+			},
+			resize: 15,
+			hasMore: true
 		}
 	},
 	watch: {
@@ -47,6 +48,7 @@ export default {
 	},
 	async onLoad(options) {
 		await this.$onLaunched;
+		this.flag = true
 		this.getFeatured()
 		this.getImgList()
 	},
@@ -63,16 +65,20 @@ export default {
 		}
 	},
 
-	onReachBottom() {
-		console.log('滚动到底部时加载更多数据---');
-		// 滚动到底部时加载更多数据
-		if (!this.isLoading && !this.noMoreData) {
-			this.getImgList()
-		}
-	},
+	// onReachBottom() {
+	// 	console.log('触底1---', this.hasMore);
+	// 	// 首先要判断是否还要继续加载
+	// 	if (!this.hasMore) {
+	// 		return
+	// 	}
+	// 	uni.showLoading({
+	// 		title: '加载中...'
+	// 	});
+	// 	this.getImgList()
+
+	// },
 
 	methods: {
-
 		onTab(i) {
 			this.current = i
 		},
@@ -85,10 +91,16 @@ export default {
 			fetch(this.$api.getImageGroups, data, 'post').then((res) => {
 				if (res?.data?.code === 200) {
 					let temp = res?.data?.data || []
+					try {
+						temp.forEach(item => {
+							item.cover_image = item.cover_image
+						})
+					} catch (error) {
+						//TODO handle the exception
+					}
 					this.featuredList = temp
 				} else {}
 			}).catch(err => {
-				this.noMoreData = true
 				console.log('err---', err);
 
 			})
@@ -96,28 +108,35 @@ export default {
 
 		// 获取首页列表
 		getImgList() {
-			if (this.isLoading || this.noMoreData) return
-			let data = this.queryData
-
 			this.isLoading = true
-			fetch(this.$api.getImageGroups, data, 'post').then((res) => {
+			fetch(this.$api.getImageGroups, this.queryData, 'post').then((res) => {
 				if (res?.data?.code === 200) {
 					let temp = res?.data?.data || []
 					if (temp && temp?.length > 0) {
+						temp.forEach(item => {
+							// item.cover_image = item.cover_image + `?x-oss-process=image/resize,p_${this.resize}`
+							item.cover_image = item.cover_image
+						})
 						this.imageGroups = [...this.imageGroups, ...temp]
 
 						this.queryData.pageNumber++
-						if (temp.length < this.queryData.pageSize) {
-							this.noMoreData = true
-						}
+						this.flag = true;
+						this.isLoading = false
+						this.hasMore = true
 
+						uni.hideLoading();
 					} else {
-						this.noMoreData = true
-					}
+						this.hasMore = false
+						this.flag = true;
+						this.isLoading = false
 
-					this.isLoading = false
+						uni.hideLoading();
+					}
 				} else {
+					this.hasMore = true
 					this.isLoading = false
+
+					uni.hideLoading();
 				}
 			}).catch(err => {
 				console.log('err---', err);
@@ -143,16 +162,18 @@ export default {
 			let scrollHeight = e.detail.scrollHeight
 			uni.createSelectorQuery().select('.home-main').boundingClientRect(data => {
 				// 内容盒子滚动距离+内容盒子高度，是否大于内容盒子内滚动条在Y轴上的滚动距离
-				let bottomHeight = scrollTop + data.height - 35 //误差px
+				let bottomHeight = scrollTop + data.height - 10 //误差px
 				// console.log('bottomHeight---',this.page, this.isBottom, this.flag, bottomHeight, scrollHeight);
 
-				if (bottomHeight >= scrollHeight) {
+				if (bottomHeight >= scrollHeight && this.flag) {
+					this.flag = false
+
+					this.getImgList()
+
 					console.log('111');
 				}
 			}).exec()
 		},
 	},
-
-
 
 }

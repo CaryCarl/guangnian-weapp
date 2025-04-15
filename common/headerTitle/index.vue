@@ -71,7 +71,7 @@
 
 		.title {
 			color: #24231f;
-			font-size: 36rpx;
+			font-size: 32rpx;
 			line-height: 30px;
 			font-weight: bold;
 			text-align: center;

@@ -1,5 +1,5 @@
-const baseUrl = 'http://192.168.5.22:3080';
-// const baseUrl = 'https://www.imgadmin.juzishu.cn';
+// const baseUrl = 'http://192.168.5.22:3080';
+const baseUrl = 'https://www.imgadmin.juzishu.cn';
 
 import store from '../store'
 

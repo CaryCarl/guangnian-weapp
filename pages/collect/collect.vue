@@ -20,20 +20,40 @@
 		data() {
 			return {
 				spinState: true,
-				list: []
+				list: [],
+				resize:15
 			};
 		},
+		
+		
 
 		async onLoad(options) {
 			await this.$onLaunched;
 			this.getList()
 		},
+		
+		onShareAppMessage() {
+			return {
+				title: '', // 默认为小程序名称
+				path:"", // 默认为当前页面路径
+				imageUrl: '', // 默认为当前页面的截图
+			}
+		},
+		
 		methods: {
 			getList() {
 				this.spinState = true
 				fetch(this.$api.getUserCollections, {}, 'post').then((res) => {
 					if (res?.data?.code === 200) {
 						let temp = res?.data?.data || []
+						try {
+							temp.forEach(item=>{
+								item.cover_image = item.cover_image
+							})
+						} catch (error) {
+							//TODO handle the exception
+						}
+						
 						this.list = temp
 						this.spinState = false
 					} else {
@@ -61,8 +81,8 @@
 	.grid-size {
 		.jq-row {
 			position: relative;
-			width: calc(50% - 16rpx);
-			height: 500rpx;
+			width: calc(33.3% - 12rpx);
+			height: 400rpx;
 			border-radius: 12rpx;
 			overflow: hidden;
 			background-color: #ffffff;
