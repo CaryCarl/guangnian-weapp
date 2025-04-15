@@ -17,7 +17,7 @@
 				V1.0.6
 			</view>
 			<view class="f24 mt32">
-				小橘正在努力开发中~~~
+				小橘正在努力开发中~~
 			</view>
 		</view>
 	</view>
