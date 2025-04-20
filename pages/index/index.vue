@@ -6,10 +6,10 @@
 		<Header-Title :title="current === 0?'小橘图库':'我的'"></Header-Title>
 
 		<Ball-Spin v-if="isLoading"></Ball-Spin>
-		<view v-show="current === 0" class="home-main" :style="{marginTop: `calc(${menuButtonInfo.top}px + ${topRpx})`,
-			     height:  `calc(100% - ${menuButtonInfo.top - 60}px)`}">
+		<view class="home-main" :style="{marginTop: `calc(${menuButtonInfo.top}px + ${topRpx})`,
+			     height:  `calc(100% - ${menuButtonInfo.top - 30}px)`}">
 			<scroll-view :scroll-top="scrollTop" scroll-y="true" class="scroll-Y" @scroll="scroll"
-				:style="{height:  `calc(100vh - ${menuButtonInfo.top + 60}px - ${topRpx})`}">
+				:style="{height:  `calc(100vh - ${menuButtonInfo.top}px - ${topRpx})`}">
 				<view class="box-header qz-fl-sb mt36 mb12">
 					<view class="header-title">推荐</view>
 				</view>
@@ -28,7 +28,7 @@
 		</view>
 
 		<My v-show="current === 1"></My>
-		<Recharge-Template @onTab="onTab" :current="current"></Recharge-Template>
+		<!-- <Recharge-Template @onTab="onTab" :current="current"></Recharge-Template> -->
 	</view>
 </template>
 

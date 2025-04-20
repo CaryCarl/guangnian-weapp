@@ -1,10 +1,10 @@
 {
 	"extEnable": true,
-	"extAppid": "wx2068a1d69119f1e3",
+	"extAppid": "",
 	"directCommit": false,
 	"ext": {
         "name":"景区小程序",
-        "appid": "wx2068a1d69119f1e3",
+        "appid": "",
         "image":"http://wx.qlogo.cn/mmhead/Q3auHgzwzM4yZJY7D2ppicJ0IKtoUp0sEjMZ5SCxmnrpwcc3dbxRs4g/0"
 	}
 }

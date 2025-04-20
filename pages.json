@@ -63,7 +63,7 @@
 		"fontSize": "22px",
 		"selectedColor": "#f05b47",
 		"backgroundColor": "#ffffff",
-		"custom": true,
+		// "custom": true,
 		"list": [{
 			"pagePath": "pages/index/index",
 			"text": "首页",

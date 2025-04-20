@@ -18,16 +18,6 @@ export default {
 				id: 1
 			}],
 			fileImg: '',
-			homeHeader: [{
-					imageUrl: 'https://qiezidj-resource.oss-cn-shenzhen.aliyuncs.com/jingqu/banner1.png'
-				},
-				{
-					imageUrl: 'https://qiezidj-resource.oss-cn-shenzhen.aliyuncs.com/jingqu/banner2.png'
-				},
-				{
-					imageUrl: 'https://qiezidj-resource.oss-cn-shenzhen.aliyuncs.com/jingqu/banner3.png'
-				},
-			],
 			homeHot: [],
 			imageGroups: [],
 			isShow: 1,
@@ -40,7 +30,10 @@ export default {
 				status: 1
 			},
 			resize: 15,
-			hasMore: true
+			hasMore: true,
+			typeList: [],
+			tagsAll:[],
+			typeTagList:[]
 		}
 	},
 	watch: {
@@ -49,7 +42,7 @@ export default {
 	async onLoad(options) {
 		await this.$onLaunched;
 		this.flag = true
-		this.getFeatured()
+		this.getImageType()
 		this.getImgList()
 	},
 	async onShow() {
@@ -62,44 +55,67 @@ export default {
 			title: '', // 默认为小程序名称
 			path, // 默认为当前页面路径
 			imageUrl: '', // 默认为当前页面的截图
+			
 		}
 	},
 
-	// onReachBottom() {
-	// 	console.log('触底1---', this.hasMore);
-	// 	// 首先要判断是否还要继续加载
-	// 	if (!this.hasMore) {
-	// 		return
-	// 	}
-	// 	uni.showLoading({
-	// 		title: '加载中...'
-	// 	});
-	// 	this.getImgList()
-
-	// },
-
 	methods: {
+		getImagesByTag (tagId) {
+			let data = {
+				tagId
+			}
+			fetch(this.$api.getImagesByTag, data, 'get').then((res) => {
+				
+				
+			}).catch(err => {
+				console.log('err---', err);
+			})
+		},
+		click(row) {
+			console.log('row', row);
+			let tagList = []
+			this.tagsAll.forEach(item =>{
+				if(item.groupId === row.id) {
+					tagList.push(item)
+				}
+			})
+			this.typeTagList = tagList
+		},
+		clickTag(item) {
+			console.log('item---', item);
+			this.getImagesByTag(item.id)
+		},
+
 		onTab(i) {
 			this.current = i
 		},
 		// 获取推荐
-		getFeatured() {
+		getImageType() {
 			let data = {
 				featured: 1,
 				status: 1
 			}
-			fetch(this.$api.getImageGroups, data, 'post').then((res) => {
-				if (res?.data?.code === 200) {
+			fetch(this.$api.getImageType, data, 'get').then((res) => {
+				let list = res?.data?.data||[]
+				this.typeList = list
+				console.log('图片分类---', list);
+				
+				fetch(this.$api.getImageTags, 'get').then((res) => {
 					let temp = res?.data?.data || []
-					try {
-						temp.forEach(item => {
-							item.cover_image = item.cover_image
-						})
-					} catch (error) {
-						//TODO handle the exception
-					}
-					this.featuredList = temp
-				} else {}
+					this.tagsAll = temp
+					console.log('图片标签---', temp);
+					let tagList = []
+					temp.forEach(item =>{
+						if(item.groupId === list[0].id) {
+							tagList.push(item)
+						}
+					})
+					this.typeTagList = tagList
+				}).catch(err => {
+					console.log('err---', err);
+				
+				})
+				
 			}).catch(err => {
 				console.log('err---', err);
 

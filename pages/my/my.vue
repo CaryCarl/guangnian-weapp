@@ -1,11 +1,7 @@
 <template>
 	<view class="">
-		<view class="home-bj-top">
-			<image mode="widthFix" src="@/static/img/home-top.png"></image>
-		</view>
 		<view class="my-page" :style="{top: `calc(${menuButtonInfo.top}px + ${topRpx})`,
 				     height:  `calc(100% - ${menuButtonInfo.top - 70}px)`}">
-					 
 			<view class="user-box qz-fl-start">
 				<image class="user-img mr32" src="@/static/img/zjz.png" />
 				<view>微信用户</view>
