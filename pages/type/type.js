@@ -32,8 +32,11 @@ export default {
 			resize: 15,
 			hasMore: true,
 			typeList: [],
-			tagsAll:[],
-			typeTagList:[]
+			tagsAll: [],
+			typeTagList: [],
+
+			imageList: [],
+			tagId: null
 		}
 	},
 	watch: {
@@ -43,7 +46,6 @@ export default {
 		await this.$onLaunched;
 		this.flag = true
 		this.getImageType()
-		this.getImgList()
 	},
 	async onShow() {
 		this.fileImg = this.$store.getters.getFileImg
@@ -55,112 +57,107 @@ export default {
 			title: '', // 默认为小程序名称
 			path, // 默认为当前页面路径
 			imageUrl: '', // 默认为当前页面的截图
-			
 		}
 	},
 
 	methods: {
-		getImagesByTag (tagId) {
+		getImagesByTag() {
+			// *
+			// * 请求参数:
+			// * - tagId: 标签ID (必填)
+			// * - page: 页码，默认为1
+			// * - pageSize: 每页数量，默认为10
+			// * - sortBy: 排序字段，默认为creation_time
+			// * - sortOrder: 排序方式，asc或desc，默认为desc
+			// */
 			let data = {
-				tagId
+				tagId: this.tagId,
+				page: this.queryData.pageNumber,
+				pageSize: this.queryData.pageSize
 			}
+			let list = []
+			this.isLoading = true
 			fetch(this.$api.getImagesByTag, data, 'get').then((res) => {
-				
-				
+				console.log('图片列表---', res);
+				if (res?.data?.code === 200) {
+					list = res.data.data
+					if (list?.length > 0) {
+
+						this.queryData.pageNumber++
+						this.imageList = [...this.imageList, ...list]
+						this.flag = true;
+						this.isLoading = false
+					} else {
+						this.flag = true;
+						this.isLoading = false
+
+					}
+				}
+
 			}).catch(err => {
 				console.log('err---', err);
+				this.flag = true;
+				this.isLoading = false
 			})
 		},
 		click(row) {
-			console.log('row', row);
 			let tagList = []
-			this.tagsAll.forEach(item =>{
-				if(item.groupId === row.id) {
+			this.tagsAll.forEach(item => {
+				if (item.groupId === row.id) {
 					tagList.push(item)
 				}
 			})
+			console.log('row', row, tagList);
 			this.typeTagList = tagList
+			this.imageList = []
+			if (tagList?.length > 0) {
+
+				this.tagId = tagList[0].id
+				this.queryData.pageNumber = 1
+				this.getImagesByTag()
+			}
 		},
 		clickTag(item) {
 			console.log('item---', item);
-			this.getImagesByTag(item.id)
+			this.tagId = item.id
+			this.queryData.pageNumber = 1
+			this.imageList = []
+			this.getImagesByTag()
 		},
 
 		onTab(i) {
 			this.current = i
 		},
-		// 获取推荐
+		// 获取分类、所有标签
 		getImageType() {
 			let data = {
 				featured: 1,
-				status: 1
+				status: 1,
 			}
 			fetch(this.$api.getImageType, data, 'get').then((res) => {
-				let list = res?.data?.data||[]
+				let list = res?.data?.data || []
 				this.typeList = list
-				console.log('图片分类---', list);
-				
 				fetch(this.$api.getImageTags, 'get').then((res) => {
 					let temp = res?.data?.data || []
 					this.tagsAll = temp
-					console.log('图片标签---', temp);
 					let tagList = []
-					temp.forEach(item =>{
-						if(item.groupId === list[0].id) {
+					temp.forEach(item => {
+						if (item.groupId === list[0].id) {
 							tagList.push(item)
 						}
 					})
+					console.log('图片标签-tagList--', tagList);
 					this.typeTagList = tagList
+					this.tagId = tagList[0].id
+					this.getImagesByTag()
 				}).catch(err => {
 					console.log('err---', err);
-				
+
 				})
-				
+
 			}).catch(err => {
 				console.log('err---', err);
 
-			})
-		},
-
-		// 获取首页列表
-		getImgList() {
-			this.isLoading = true
-			fetch(this.$api.getImageGroups, this.queryData, 'post').then((res) => {
-				if (res?.data?.code === 200) {
-					let temp = res?.data?.data || []
-					if (temp && temp?.length > 0) {
-						temp.forEach(item => {
-							// item.cover_image = item.cover_image + `?x-oss-process=image/resize,p_${this.resize}`
-							item.cover_image = item.cover_image
-						})
-						this.imageGroups = [...this.imageGroups, ...temp]
-
-						this.queryData.pageNumber++
-						this.flag = true;
-						this.isLoading = false
-						this.hasMore = true
-
-						uni.hideLoading();
-					} else {
-						this.hasMore = false
-						this.flag = true;
-						this.isLoading = false
-
-						uni.hideLoading();
-					}
-				} else {
-					this.hasMore = true
-					this.isLoading = false
-
-					uni.hideLoading();
-				}
-			}).catch(err => {
-				console.log('err---', err);
-				this.isLoading = false
-				uni.showToast({
-					title: '获取图片列表失败',
-					icon: 'none'
-				})
 			})
 		},
 		onImg(item) {
@@ -178,15 +175,11 @@ export default {
 			let scrollHeight = e.detail.scrollHeight
 			uni.createSelectorQuery().select('.home-main').boundingClientRect(data => {
 				// 内容盒子滚动距离+内容盒子高度，是否大于内容盒子内滚动条在Y轴上的滚动距离
-				let bottomHeight = scrollTop + data.height - 10 //误差px
-				// console.log('bottomHeight---',this.page, this.isBottom, this.flag, bottomHeight, scrollHeight);
-
+				let bottomHeight = scrollTop + data.height + 100 //误差px
+				console.log('bottomHeight---', scrollTop, this.flag, bottomHeight, scrollHeight);
 				if (bottomHeight >= scrollHeight && this.flag) {
 					this.flag = false
-
-					this.getImgList()
-
-					console.log('111');
+					this.getImagesByTag()
 				}
 			}).exec()
 		},

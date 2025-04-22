@@ -21,7 +21,6 @@
 				<view class="grid-size qz-fl-sb-wrap" v-if="imageGroups.length > 0">
 					<view class="jq-row mb32" v-for="(item,i) in imageGroups" :key="i" @click="onImg(item)">
 						<image  class="jq-img"  mode="aspectFill" :src="item.cover_image"></image>
-						<!-- :lazy-load="true" -->
 					</view>
 				</view>
 			</scroll-view>

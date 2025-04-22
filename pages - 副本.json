@@ -74,7 +74,7 @@
 			"text": "分类",
 			"selectedIconPath": "/static/tabbar/faxian-active.png",
 			"iconPath": "/static/tabbar/faxian.png"
-		},{
+		}, {
 			"pagePath": "pages/my/my",
 			"text": "我的",
 			"selectedIconPath": "/static/tabbar/my-active.png",

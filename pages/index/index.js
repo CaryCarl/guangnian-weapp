@@ -12,22 +12,9 @@ export default {
 			menuButtonInfo,
 			isLoading: false,
 			scrollTop: '',
-			swiperList: [{
-				imageUrl: 'https://qiezidj-resource.oss-cn-shenzhen.aliyuncs.com/images/d14b62a209f4440585e3f7442557331f.jpg',
-				name: 'a',
-				id: 1
-			}],
+			swiperList: [],
 			fileImg: '',
-			homeHeader: [{
-					imageUrl: 'https://qiezidj-resource.oss-cn-shenzhen.aliyuncs.com/jingqu/banner1.png'
-				},
-				{
-					imageUrl: 'https://qiezidj-resource.oss-cn-shenzhen.aliyuncs.com/jingqu/banner2.png'
-				},
-				{
-					imageUrl: 'https://qiezidj-resource.oss-cn-shenzhen.aliyuncs.com/jingqu/banner3.png'
-				},
-			],
+			homeHeader: [],
 			homeHot: [],
 			imageGroups: [],
 			isShow: 1,
