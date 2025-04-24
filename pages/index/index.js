@@ -27,7 +27,8 @@ export default {
 				status: 1
 			},
 			resize: 15,
-			hasMore: true
+			hasMore: true,
+			imageMogr2:"?imageMogr2/thumbnail/!20p"
 		}
 	},
 	watch: {
@@ -51,19 +52,6 @@ export default {
 			imageUrl: '', // 默认为当前页面的截图
 		}
 	},
-
-	// onReachBottom() {
-	// 	console.log('触底1---', this.hasMore);
-	// 	// 首先要判断是否还要继续加载
-	// 	if (!this.hasMore) {
-	// 		return
-	// 	}
-	// 	uni.showLoading({
-	// 		title: '加载中...'
-	// 	});
-	// 	this.getImgList()
-
-	// },
 
 	methods: {
 		onTab(i) {
@@ -96,13 +84,12 @@ export default {
 		// 获取首页列表
 		getImgList() {
 			this.isLoading = true
-			fetch(this.$api.getImageGroups, this.queryData, 'post').then((res) => {
+			fetch(this.$api.getRandomImages, this.queryData, 'post').then((res) => {
 				if (res?.data?.code === 200) {
 					let temp = res?.data?.data || []
 					if (temp && temp?.length > 0) {
 						temp.forEach(item => {
-							// item.cover_image = item.cover_image + `?x-oss-process=image/resize,p_${this.resize}`
-							item.cover_image = item.cover_image
+							item.cover_image = item.url
 						})
 						this.imageGroups = [...this.imageGroups, ...temp]
 
@@ -134,9 +121,11 @@ export default {
 				})
 			})
 		},
+		
+		
 		onImg(item) {
 			uni.navigateTo({
-				url: '/pages/imgDetails/imgDetails?id=' + item.id
+				url: `/pages/imgDetails/imgDetails?id=${item.id}&categoryId=${item.categoryId}&url=${item.url}`
 			})
 		},
 		scrollTop() {

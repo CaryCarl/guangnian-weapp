@@ -3,7 +3,7 @@
 		<Ball-Spin v-if="spinState"></Ball-Spin>
 		<view class="grid-size qz-fl-sb-wrap" v-if="list.length > 0">
 			<view class="jq-row mb32" v-for="(item,i) in list" :key="i" @click="onImg(item)">
-				<image class="jq-img" mode="aspectFill" :src="item.cover_image"></image>
+				<image class="jq-img" mode="aspectFill" :src="item.url + '?imageMogr2/thumbnail/!30p'"></image>
 			</view>
 		</view>
 		<view v-else>
@@ -43,7 +43,11 @@
 		methods: {
 			getList() {
 				this.spinState = true
-				fetch(this.$api.getUserCollections, {}, 'post').then((res) => {
+				fetch(this.$api.getUserFavorites, {
+					pageNumber:1,
+					pageSize:100
+				}, 'post').then((res) => {
+					console.log('用户收藏---', res);
 					if (res?.data?.code === 200) {
 						let temp = res?.data?.data || []
 						try {
@@ -66,7 +70,7 @@
 			},
 			onImg(item) {
 				uni.navigateTo({
-					url: '/pages/imgDetails/imgDetails?id=' + item.id
+					url: `/pages/imgDetails/imgDetails?id=${item.id}&categoryId=${item.categoryId}&url=${item.url}`
 				})
 			},
 		}

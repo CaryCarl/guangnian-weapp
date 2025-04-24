@@ -13,14 +13,14 @@
 				<view class="box-header qz-fl-sb mt36 mb12">
 					<view class="header-title">推荐</view>
 				</view>
-				<view class="grid-size recommend">
+				<!-- <view class="grid-size recommend">
 					<view class="jq-row mb32" v-for="(item,i) in featuredList" :key="i" @click="onImg(item)">
 						<image class="jq-img" mode="aspectFill" :src="item.cover_image"></image>
 					</view>
-				</view>
+				</view> -->
 				<view class="grid-size qz-fl-sb-wrap" v-if="imageGroups.length > 0">
 					<view class="jq-row mb32" v-for="(item,i) in imageGroups" :key="i" @click="onImg(item)">
-						<image  class="jq-img"  mode="aspectFill" :src="item.cover_image"></image>
+						<image  class="jq-img"  mode="aspectFill" :src="item.cover_image + imageMogr2"></image>
 					</view>
 				</view>
 			</scroll-view>

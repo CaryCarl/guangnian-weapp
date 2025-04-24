@@ -12,10 +12,21 @@ const getImageType = '/api/get_image_type'
 const getImageTags = '/api/get_image_tags'
 const getImagesByTag = '/api/image/get_images_by_tag'
 
+const getRandomImages = '/api/randomImages/get_random_images'	//获取随机图片
+const checkImageFavorite = '/api/imageFavorites/checkImageFavorite'	//用户收藏
+const addFavorite = '/api/imageFavorites/addFavorite'	//用户收藏
+const removeFavorite = '/api/imageFavorites/removeFavorite'	//用户收藏
+const getUserFavorites = '/api/imageFavorites/getUserFavorites'	//用户收藏列表
+
 
 
 
 module.exports = {
+	getUserFavorites,
+	removeFavorite,
+	addFavorite,
+	checkImageFavorite,
+	getRandomImages,
 	getImagesByTag,
 	getImageTags,
 	getImageType,

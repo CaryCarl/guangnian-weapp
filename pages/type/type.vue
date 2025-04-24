@@ -20,6 +20,9 @@
 						<image class="jq-img" mode="aspectFill" :src="item.url + '?imageMogr2/thumbnail/!20p'"></image>
 					</view>
 				</view>
+				<view class="" style="width: 100%;height: 150rpx;">
+					
+				</view>
 			</scroll-view>
 		</view>
 	</view>

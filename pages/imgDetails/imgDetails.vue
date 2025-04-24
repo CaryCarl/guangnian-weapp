@@ -5,7 +5,7 @@
 		<swiper v-if="imageList.length > 0" class="swiper" :indicator-dots="false" :autoplay="false" :circular="false"
 			@change="onSwiperChange">
 			<swiper-item v-for="(item, i) in imageList" :key="i">
-				<image class="swiper-image" :src="item" mode="aspectFill" />
+				<image class="swiper-image" :src="item.url + '?imageMogr2/format/webp'" mode="aspectFill" />
 			</swiper-item>
 		</swiper>
 
@@ -14,10 +14,10 @@
 			{{ currentIndex + 1 }} / {{ imageList.length }}
 		</view>
 
-		<view class="operate">
+		<view class="operate" v-if="imageList.length > 0">
 			<img @click="downloadImage" class="xiazai" src="/static/img/xiazai.png" alt="" srcset="" />
 			<view class="mt20 ">
-				<img v-if="collected" @click="toggleCollect(false)" class="shoucang" src="/static/img/shoucang-ac.png" alt="" srcset="" />
+				<img v-if="imageList[currentIndex].collected" @click="toggleCollect(false)" class="shoucang" src="/static/img/shoucang-ac.png" alt="" srcset="" />
 				<img v-else @click="toggleCollect(true)" class="shoucang" src="/static/img/shoucang.png" alt="" srcset="" />
 			</view>
 		</view>
@@ -34,13 +34,26 @@
 				imageList: [],
 				currentIndex: 0,
 				collected:false,
-				spinState: true
+				spinState: true,
+				categoryId:"",
+				firstImage:""
 			};
 		},
-		onLoad(options) {
-			this.id = options?.id || 1
-			this.isCollect()
-			this.getImgList(options?.id)
+		onLoad(op) {
+			console.log('op', op);
+			let id = Number(op?.id) || 1
+			this.id = id
+			this.firstImage = op.url
+			
+			this.imageList = [{
+				id: id,
+				url:op.url,
+				collected:null,
+				categoryId:op.categoryId
+			}]
+			this.categoryId = op.categoryId
+			this.getImgList(op?.categoryId)
+			
 		},
 		// onShareAppMessage() {
 		// 	return {
@@ -54,30 +67,58 @@
 				
 			},
 			// 查询分组是否被收藏
-			isCollect() {
-				fetch(this.$api.checkCollection, {
-					group_id: Number(this.id)
+			isCollect(image_id,index) {
+				fetch(this.$api.checkImageFavorite, {
+					image_id: image_id
 				}, 'post').then((res) => {
+					console.log('是否收藏res', res);
 					if(res?.data?.code === 200) {
-						this.collected = res?.data?.data.collected
-						
-						console.log('是否收藏', this.collected);
+						let collected = res?.data?.data.collected || false
+						console.log('this.imageList[index]----', this.imageList[index]);
+						this.imageList[index].collected = collected
+						console.log('是否收藏', collected);
 					}
 				
 				})
 			},
+			// 添加/取消收藏
 			toggleCollect(state) {
-				console.log('state---', state);
+				let info = this.imageList[this.currentIndex]
+				console.log('state---', info, state);
 				
-				
-				fetch(this.$api.toggleCollect, {
-					group_id: Number(this.id)
-				}, 'post').then((res) => {
-					console.log('收藏操作', res);
-					if(res?.data?.code === 200) {
-						this.collected =  res?.data?.data
-					}
-				})
+				if(info.collected) {
+					// 取消收藏
+					fetch(this.$api.removeFavorite, {
+						image_id: info.id
+					}, 'post').then((res) => {
+						console.log('取消收藏操作', res);
+						if(res?.data?.code === 200) {
+							this.imageList[this.currentIndex].collected =  res?.data?.data?.collected
+						}else {
+							wx.showToast({
+								title: `取消收藏失败`,
+								icon: 'none'
+							})
+						}
+					})
+					
+				}else {
+					// 添加收藏
+					fetch(this.$api.addFavorite, {
+						image_id: info.id
+					}, 'post').then((res) => {
+						console.log('收藏操作', res);
+						if(res?.data?.code === 200) {
+							this.imageList[this.currentIndex].collected =  res?.data?.data?.collected
+						}else {
+							wx.showToast({
+								title: `收藏失败`,
+								icon: 'none'
+							})
+						}
+					})
+					
+				}
 				
 			},
 			downloadImage() {
@@ -86,10 +127,10 @@
 					mask: true
 				})
 				const imageList = []
-				let urls = this.imageList
+				let urls = this.imageList[this.currentIndex]
 				// 循环数组
 				for (let i = 0; i < urls.length; i++) {
-					imageList.push(this.getTempPath(urls[i]))
+					imageList.push(this.getTempPath(urls[i].url))
 				}
 				const loadTask = []
 				let index = 0
@@ -162,17 +203,29 @@
 				})
 			},
 			onSwiperChange(event) {
-				this.currentIndex = event.detail.current;
+				let current = event.detail.current;
+				this.currentIndex = current
+				if(this.imageList[current].collected === null) {
+					this.isCollect(this.imageList[current].id, current)
+				}
 			},
 			getImgList(id) {
 				this.spinState = true
-				fetch(this.$api.getImageGroups, {
-					id
+				fetch(this.$api.getRandomImages, {
+					category_id: this.categoryId,
+					pageNumber :1,
+					pageSize : 4,
+					status: 1
 				}, 'post').then((res) => {
 					if (res.data.code === 200) {
-						let temp = res.data?.data[0]?.images_url || []
-						this.imageList = temp
+						let temp = res.data?.data
+						temp.forEach(item =>{
+							item.collected = null
+						})
+						this.imageList = [...this.imageList, ...temp]
+						this.isCollect(this.imageList[0].id,0)
 						this.spinState = false
+						
 					}else {
 						this.spinState = false
 					}

@@ -161,8 +161,9 @@ export default {
 			})
 		},
 		onImg(item) {
+			console.log('item----', item);
 			uni.navigateTo({
-				url: '/pages/imgDetails/imgDetails?id=' + item.id
+				url: `/pages/imgDetails/imgDetails?id=${item.id}&categoryId=${item.category_id}&url=${item.url}`
 			})
 		},
 		scrollTop() {
