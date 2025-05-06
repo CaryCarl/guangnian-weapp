@@ -17,11 +17,9 @@ export default {
             this.$store.commit('setInviteInfoLogin', inv); //存储邀请者信息用于登录
         }
 		
-        let info = myUtils.getExtStoreId('extAppid');
         let xcxInfo = {
-            name: info?.name,
-            appid: info?.appid,
-            logo: info?.image
+            name: "小橘图库",
+            appid: "wx65ede331cd1aadbc",
         };
         this.$store.commit('setXcxInfo', xcxInfo);
         // 用户登录

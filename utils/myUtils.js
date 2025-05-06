@@ -235,16 +235,4 @@ export default class myUtils {
 		var time = year + '-' + month + '-' + date;
 		return time;
 	}
-
-	//同步取出ext.json对象
-	static getExtStoreId(type) {
-		try {
-			const extConfig = uni.getExtConfigSync ? uni.getExtConfigSync() : {
-				shopId: '默认的门店id'
-			}
-			return extConfig;
-		} catch (err) {
-			console.log(err, 'getExtStoreId__error')
-		}
-	}
 }

@@ -16,7 +16,10 @@
 			
 			<view class="footer">
 				<view class="">
-					V1.0.7 2025-04-25
+					V1.0.8 
+				</view>
+				<view class="f24 mt24">
+					2025-04-26
 				</view>
 				<view class="f24 mt32">
 					小橘正在努力开发中~~
@@ -24,7 +27,6 @@
 			</view>
 		</view>
 	</view>
-	
 </template>
 
 <script>
