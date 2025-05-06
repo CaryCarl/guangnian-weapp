@@ -48,6 +48,13 @@
 			{
 				"navigationBarTitleText" : "收藏"
 			}
+		},
+		{
+			"path" : "pages/my/about/about",
+			"style" : 
+			{
+				"navigationBarTitleText" : "更新日志"
+			}
 		}
 	],
 	"globalStyle": {
