@@ -6,23 +6,17 @@
 				<image class="user-img mr32" src="@/static/img/zjz.png" />
 				<view>微信用户</view>
 			</view>
-		
+
 			<view class="list mt32">
 				<view class="list-item" @click="change()">
 					<text>收藏</text>
 					<image class="left-img mr32" src="@/static/img/you.png" />
 				</view>
 			</view>
-			
-			<view class="footer">
-				<view class="">
-					V1.0.8 
-				</view>
-				<view class="f24 mt24">
-					2025-04-26
-				</view>
-				<view class="f24 mt32">
-					小橘正在努力开发中~~
+			<view class="list mt32">
+				<view class="list-item" @click="changeMd()">
+					<text>更新日志</text>
+					<image class="left-img mr32" src="@/static/img/you.png" />
 				</view>
 			</view>
 		</view>

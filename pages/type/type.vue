@@ -6,7 +6,7 @@
 		<Header-Title :title="'分类'"></Header-Title>
 		<Ball-Spin v-if="isLoading"></Ball-Spin>
 		<view class="header-main" :style="{marginTop: `calc(${menuButtonInfo.top}px + ${topRpx})`}">
-			<u-tabs :list="typeList" @click="click" :lineColor="`url(${lineBg}) 100% 100%`" :activeStyle="{
+			<u-tabs :list="typeList" @click="clickType" :lineColor="`url(${lineBg}) 100% 100%`" :activeStyle="{
 			        color: '#303133',
 			        fontWeight: 'bold',
 			        transform: 'scale(1.05)'
@@ -15,11 +15,14 @@
 			        transform: 'scale(1)'
 			    }" itemStyle="padding-left: 15px; padding-right: 15px; height: 34px;"></u-tabs>
 			<view class="ch-tabs">
-				<u-tabs :list="typeTagList" @click="clickTag" lineColor="#f56c6c"></u-tabs>
+				<view @click="clickTag(item)" :class="['tag ', tagId === item.id ? 'ch-tabs-active':'']"
+					v-for="(item,i) in typeTagList" :key="i">
+					{{item.name}}
+				</view>
 			</view>
 		</view>
-		<view class="home-main" :style="{marginTop: `calc(${menuButtonInfo.top+85}px + ${topRpx})`,
-			     height:  `calc(100% - ${menuButtonInfo.top+130}px)`}">
+		<view class="home-main" :style="{marginTop: `calc(${menuButtonInfo.top+73}px + ${topRpx})`,
+			     height:  `calc(100% - ${menuButtonInfo.top+110}px)`}">
 			<scroll-view :scroll-top="scrollTop" scroll-y="true" class="scroll-Y" @scroll="scroll"
 				:style="{height:  `calc(100vh - ${menuButtonInfo.top}px - ${topRpx})`}">
 				<view class="grid-size qz-fl-sb-wrap" v-if="imageList.length > 0">
@@ -28,7 +31,6 @@
 					</view>
 				</view>
 				<view class="" style="width: 100%;height: 150rpx;">
-
 				</view>
 			</scroll-view>
 		</view>

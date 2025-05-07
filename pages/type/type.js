@@ -8,7 +8,7 @@ import {
 export default {
 	data() {
 		return {
-			topRpx: '40px',
+			topRpx: '30px',
 			menuButtonInfo,
 			isLoading: false,
 			scrollTop: '',
@@ -22,7 +22,6 @@ export default {
 			imageGroups: [],
 			isShow: 1,
 			featuredList: [],
-			current: 0,
 			flag: true,
 			queryData: {
 				pageNumber: 1,
@@ -100,7 +99,7 @@ export default {
 				this.isLoading = false
 			})
 		},
-		click(row) {
+		clickType(row) {
 			let tagList = []
 			this.tagsAll.forEach(item => {
 				if (item.groupId === row.id) {
@@ -111,23 +110,18 @@ export default {
 			this.typeTagList = tagList
 			this.imageList = []
 			if (tagList?.length > 0) {
-
 				this.tagId = tagList[0].id
 				this.queryData.pageNumber = 1
 				this.getImagesByTag()
 			}
 		},
 		clickTag(item) {
-			console.log('item---', item);
 			this.tagId = item.id
 			this.queryData.pageNumber = 1
 			this.imageList = []
 			this.getImagesByTag()
 		},
 
-		onTab(i) {
-			this.current = i
-		},
 		// 获取分类、所有标签
 		getImageType() {
 			let data = {

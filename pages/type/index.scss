@@ -8,31 +8,25 @@
 		position: fixed;
 		left: 0;
 		z-index: 999;
+		width: 100%;
 		.ch-tabs {
-			height: 40rpx;
-			::v-deep .u-tabs {
-				height: 100%;
-				.u-tabs__wrapper {
-					height: 100%;
-				}
+			margin-top: 8rpx;
+			padding-left: 32rpx;
+			display: flex;
+			align-items: center;
+			.tag {
+				padding: 4rpx 16rpx 4rpx 16rpx;
+				margin-right: 20rpx;
+				border-radius: 24rpx;
+				font-size: 28rpx;
+			}
+			
+			.ch-tabs-active {
+				color: #ffffff;
+				background: linear-gradient(90deg, #f59689 0%, #f05b47 100%) !important;
 			}
 		}
 	}
-
-	// ::v-deep .u-tabs__wrapper__nav__item {
-	// 	padding: 0 60rpx;
-	// 	flex: none !important;
-	// }
-
-	// ::v-deep .u-tabs__wrapper__nav__item__text {
-	// 	font-size: 30rpx;
-	// 	font-weight: bold;
-	// }
-
-	// ::v-deep .u-tabs__wrapper__nav__line {
-	// 	height: 6rpx;
-	// 	border-radius: 15px;
-	// }
 
 	.home-bj-top {
 		position: fixed;

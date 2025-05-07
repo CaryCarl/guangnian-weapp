@@ -15,7 +15,7 @@
 		</view>
 
 		<view class="operate" v-if="imageList.length > 0">
-			<img @click="downloadImage" class="xiazai" src="/static/img/xiazai.png" alt="" srcset="" />
+			<img @click="download" class="xiazai" src="/static/img/xiazai.png" alt="" srcset="" />
 			<view class="mt20 ">
 				<img v-if="imageList[currentIndex].collected" @click="toggleCollect(false)" class="shoucang"
 					src="/static/img/shoucang-ac.png" alt="" srcset="" />
@@ -57,13 +57,16 @@
 			this.getImgList(op?.categoryId)
 
 		},
-		// onShareAppMessage() {
-		// 	return {
-		// 		title: '123',
-		// 		path: `pages/index/index`,
-		// 		imageUrl: this.imageList[0],
-		// 	}
-		// },
+		onShareAppMessage() {
+			const currentImage = this.imageList[this.currentIndex];
+			// let path = `pages/imgDetails/imgDetails?id=${currentImage.id}&url=${encodeURIComponent(currentImage.url)}&categoryId=${this.categoryId}`
+			let path = `pages/imgDetails/imgDetails?id=${currentImage.id}&url=${currentImage.url}&categoryId=${this.categoryId}`
+			return {
+				title: '分享一张精美图片给你',
+				path,
+				imageUrl: currentImage.url,
+			}
+		},
 		methods: {
 			onBack() {
 
@@ -123,71 +126,47 @@
 				}
 
 			},
-			downloadImage() {
+			download() {
 				wx.showLoading({
-					title: '图片下载中',
-					mask: true
+					title: '图片下载中...',
+					mask: true // 添加蒙层防止用户触摸操作
 				})
-
-				// 获取当前显示的图片URL
-				const currentImageUrl = this.imageList[this.currentIndex].url
-				console.log('正在下载图片:', currentImageUrl)
-
-				// 下载单张图片
-				this.getTempPath(currentImageUrl)
-					.then(res => {
-						wx.showToast({
-							title: '下载完成',
-							duration: 3000
-						})
-					})
-					.catch(err => {
-						wx.showToast({
-							title: `下载失败`,
-							icon: 'none',
-							duration: 3000
-						})
-						console.error('下载失败:', err)
-					})
-			},
-			getTempPath(url) {
-				return new Promise((resolve, reject) => {
-					wx.downloadFile({
-						url: url,
-						success: function(res) {
-							var temp = res.tempFilePath
+				wx.downloadFile({
+					url: this.imageList[this.currentIndex].url,
+					success: function(res) {
+						// 下载成功后的临时路径
+						if (res.statusCode === 200) {
+							// 保存图片到相册
+							wx.hideLoading()
 							wx.saveImageToPhotosAlbum({
-								filePath: temp,
-								success(res) {
-									return resolve(res)
+								filePath: res.tempFilePath,
+								success: function() {
+									wx.showToast({
+										title: '保存成功',
+										icon: 'success'
+									})
 								},
 								fail: function(err) {
-									reject(url + JSON.stringify(err))
+									console.error('保存失败', err)
+									wx.showToast({
+										title: '保存失败',
+										icon: 'none'
+									})
 								}
 							})
-						},
-						fail: function(err) {
-							reject(url + JSON.stringify(err))
 						}
-					})
+					},
+					fail: function(err) {
+						console.error('下载失败', err)
+						wx.hideLoading()
+						wx.showToast({
+							title: '下载失败',
+							icon: 'none'
+						})
+					}
 				})
-			},
-			handleSaveError(err) {
-				if (err.errMsg.includes('auth')) {
-					wx.showModal({
-						title: '需要相册权限',
-						content: '请前往设置开启相册权限',
-						success: (res) => res.confirm && wx.openSetting()
-					})
-				}
 			},
 
-			handleDownloadError(err) {
-				wx.showToast({
-					title: `下载失败：${err.errMsg}`,
-					icon: 'none'
-				})
-			},
 			onSwiperChange(event) {
 				let current = event.detail.current;
 				this.currentIndex = current

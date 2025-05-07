@@ -47,7 +47,7 @@
 				const pages = getCurrentPages();
 				if (pages.length <= 1) {
 					uni.switchTab({
-						url: '/pages/home/index'
+						url: '/pages/index/index'
 					}); // 无历史则跳转首页 
 				} else {
 					uni.navigateBack({
