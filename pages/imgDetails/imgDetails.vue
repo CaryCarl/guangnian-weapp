@@ -189,8 +189,9 @@
 						})
 						this.imageList = [...this.imageList, ...temp]
 						this.isCollect(this.imageList[0].id, 0)
-						this.spinState = false
-
+						setTimeout(() =>{
+							this.spinState = false
+						},1000)
 					} else {
 						this.spinState = false
 					}

@@ -72,7 +72,8 @@ export default {
 			let data = {
 				tagId: this.tagId,
 				page: this.queryData.pageNumber,
-				pageSize: this.queryData.pageSize
+				pageSize: this.queryData.pageSize,
+				status:1
 			}
 			let list = []
 			this.isLoading = true
@@ -133,14 +134,13 @@ export default {
 				this.typeList = list
 				fetch(this.$api.getImageTags, 'get').then((res) => {
 					let temp = res?.data?.data || []
-					this.tagsAll = temp
 					let tagList = []
 					temp.forEach(item => {
-						if (item.groupId === list[0].id) {
+						if (item.groupId === list[0].id && item.status === 1) {
 							tagList.push(item)
 						}
 					})
-					console.log('图片标签-tagList--', tagList);
+					this.tagsAll = temp
 					this.typeTagList = tagList
 					this.tagId = tagList[0].id
 					this.getImagesByTag()
