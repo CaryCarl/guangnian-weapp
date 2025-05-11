@@ -146,7 +146,6 @@ export default {
 					this.getImagesByTag()
 				}).catch(err => {
 					console.log('err---', err);
-
 				})
 
 			}).catch(err => {
@@ -155,7 +154,6 @@ export default {
 			})
 		},
 		onImg(item) {
-			console.log('item----', item);
 			uni.navigateTo({
 				url: `/pages/imgDetails/imgDetails?id=${item.id}&categoryId=${item.category_id}&url=${item.url}`
 			})
@@ -171,7 +169,6 @@ export default {
 			uni.createSelectorQuery().select('.home-main').boundingClientRect(data => {
 				// 内容盒子滚动距离+内容盒子高度，是否大于内容盒子内滚动条在Y轴上的滚动距离
 				let bottomHeight = scrollTop + data.height + 100 //误差px
-				console.log('bottomHeight---', scrollTop, this.flag, bottomHeight, scrollHeight);
 				if (bottomHeight >= scrollHeight && this.flag) {
 					this.flag = false
 					this.getImagesByTag()
