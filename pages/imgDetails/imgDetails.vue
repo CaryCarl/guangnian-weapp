@@ -5,7 +5,8 @@
 		<swiper v-if="imageList.length > 0" class="swiper" :indicator-dots="false" :autoplay="false" :circular="false"
 			@change="onSwiperChange">
 			<swiper-item v-for="(item, i) in imageList" :key="i">
-				<image class="swiper-image" :src="item.url + '?imageMogr2/format/webp'" mode="aspectFill" />
+				<image v-if="item.is_webp == 1" class="swiper-image" :src="item.url + '?imageMogr2/format/webp'" mode="aspectFill" />
+				<image v-else class="swiper-image" :src="item.url" mode="aspectFill" />
 			</swiper-item>
 		</swiper>
 
@@ -51,7 +52,8 @@
 				id: id,
 				url: op.url,
 				collected: null,
-				categoryId: op.categoryId
+				categoryId: op.categoryId,
+				isWebp:1
 			}]
 			this.categoryId = op.categoryId
 			this.getImgList(op?.categoryId)
