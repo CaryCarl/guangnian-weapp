@@ -19,6 +19,8 @@
 					<image class="left-img mr32" src="@/static/img/you.png" />
 				</view>
 			</view>
+			
+			<view class="mt50 f28 " style="text-align: center; opacity: .75;">下载的图片是原图大小无压缩</view>
 		</view>
 	</view>
 </template>
