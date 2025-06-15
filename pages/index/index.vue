@@ -13,20 +13,15 @@
 				<view class="box-header qz-fl-sb mt36 mb12">
 					<view class="header-title">推荐</view>
 				</view>
-				<!-- <view class="grid-size recommend">
-					<view class="jq-row mb32" v-for="(item,i) in featuredList" :key="i" @click="onImg(item)">
-						<image class="jq-img" mode="aspectFill" :src="item.cover_image"></image>
-					</view>
-				</view> -->
 				<view class="grid-size qz-fl-sb-wrap" v-if="imageGroups.length > 0">
-					<view class="jq-row mb32" v-for="(item,i) in imageGroups" :key="i" @click="onImg(item)">
+					<view :id="`image-${index}`" class="jq-row mb32" v-for="(item, index) in imageGroups" :key="index" @click="onImg(item, index)">
 						<image  class="jq-img"  mode="aspectFill" :src="item.cover_image + imageMogr2"></image>
 					</view>
 				</view>
 			</scroll-view>
 		</view>
 
-		<My v-show="current === 1"></My>
+		<!-- <My v-show="current === 1"></My> -->
 		<!-- <Recharge-Template @onTab="onTab" :current="current"></Recharge-Template> -->
 	</view>
 </template>

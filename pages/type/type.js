@@ -51,9 +51,9 @@ export default {
 		await this.$onLaunched;
 	},
 	onShareAppMessage() {
-		let path = '/pages/index/index'
+		let path = '/pages/type/type'
 		return {
-			title: '', // 默认为小程序名称
+			title: '这里有你喜欢的图片~', // 默认为小程序名称
 			path, // 默认为当前页面路径
 			imageUrl: '', // 默认为当前页面的截图
 		}
@@ -78,7 +78,6 @@ export default {
 			let list = []
 			this.isLoading = true
 			fetch(this.$api.getImagesByTag, data, 'get').then((res) => {
-				console.log('图片列表---', res);
 				if (res?.data?.code === 200) {
 					list = res.data.data
 					if (list?.length > 0) {
@@ -95,7 +94,6 @@ export default {
 				}
 
 			}).catch(err => {
-				console.log('err---', err);
 				this.flag = true;
 				this.isLoading = false
 			})
@@ -154,8 +152,9 @@ export default {
 			})
 		},
 		onImg(item) {
+			console.log('item---', item);
 			uni.navigateTo({
-				url: `/pages/imgDetails/imgDetails?id=${item.id}&categoryId=${item.category_id}&url=${item.url}`
+				url: `/pages/imgDetails/imgDetails?id=${item.id}&categoryId=${item.category_id}&url=${item.url}&tags_id=${item.tags_id}`
 			})
 		},
 		scrollTop() {

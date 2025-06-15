@@ -3,7 +3,6 @@ export default {
   // 开发模式启用调式模式(请求时会打印日志)
   debug: process.env.NODE_ENV !== 'production',
   
-  // 首页页面路径
   index: {
     url: '/pages/index/index'
   },

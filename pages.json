@@ -8,7 +8,10 @@
 				"navigationBarTitleText": "首页",
 				"enablePullDownRefresh": false,
 				"onReachBottomDistance": 150,
-				"navigationStyle": "custom"
+				"navigationStyle": "custom",
+				"renderer": "skyline",
+				"componentFramework": "glass-easel",
+				"disableScroll": true
 			}
 		},{
 			"path": "pages/qrcode/qrcode",
@@ -39,7 +42,10 @@
 			"style" : 
 			{
 				"navigationBarTitleText" : "",
-				"navigationStyle": "custom"
+				"navigationStyle": "custom",
+				"renderer": "skyline",
+				"componentFramework": "glass-easel",
+				"disableScroll": true
 			}
 		},
 		{
@@ -55,6 +61,16 @@
 			{
 				"navigationBarTitleText" : "更新日志"
 			}
+		},
+		{
+			"path" : "pages/detail/detail",
+			"style" : 
+			{
+				"navigationBarTitleText" : "",
+				"renderer": "skyline",
+				"componentFramework": "glass-easel",
+				"disableScroll": true
+			}
 		}
 	],
 	"globalStyle": {
@@ -65,22 +81,22 @@
 	},
 	"tabBar": {
 		"borderStyle": "white",
-		"color": "#959595",
+		"color": "#57595c",
 		"height": "80rpx",
 		"fontSize": "22px",
 		"selectedColor": "#f05b47",
 		"backgroundColor": "#ffffff",
-		// "custom": true,
+		"custom": false,
 		"list": [{
 			"pagePath": "pages/index/index",
 			"text": "首页",
-			"selectedIconPath": "/static/tabbar/juchang-active.png",
-			"iconPath": "/static/tabbar/juchang.png"
+			"selectedIconPath": "/static/tabbar/home-active.png",
+			"iconPath": "/static/tabbar/home.png"
 		}, {
 			"pagePath": "pages/type/type",
 			"text": "分类",
-			"selectedIconPath": "/static/tabbar/lb-active.png",
-			"iconPath": "/static/tabbar/lb.png"
+			"selectedIconPath": "/static/tabbar/guige-active.png",
+			"iconPath": "/static/tabbar/guige.png"
 		},{
 			"pagePath": "pages/my/my",
 			"text": "我的",

@@ -70,7 +70,7 @@
 			},
 			onImg(item) {
 				uni.navigateTo({
-					url: `/pages/imgDetails/imgDetails?id=${item.id}&categoryId=${item.categoryId}&url=${item.url}`
+					url: `/pages/imgDetails/imgDetails?id=${item.id}&categoryId=${item.categoryId}&url=${item.url}&tags_id=${item.tagsId}`
 				})
 			},
 		}

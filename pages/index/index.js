@@ -28,7 +28,9 @@ export default {
 			},
 			resize: 15,
 			hasMore: true,
-			imageMogr2:"?imageMogr2/thumbnail/!20p"
+			imageMogr2: "?imageMogr2/thumbnail/!20p",
+
+			sharedImageInfo: null
 		}
 	},
 	watch: {
@@ -39,6 +41,12 @@ export default {
 		this.flag = true
 		this.getFeatured()
 		this.getImgList()
+
+		if (wx.canIUse('skyline')) {
+			console.log('当前环境支持Skyline引擎');
+		} else {
+			console.log('当前环境不支持Skyline引擎，动画效果可能受限');
+		}
 	},
 	async onShow() {
 		this.fileImg = this.$store.getters.getFileImg
@@ -47,7 +55,7 @@ export default {
 	onShareAppMessage() {
 		let path = '/pages/index/index'
 		return {
-			title: '', // 默认为小程序名称
+			title: '海量高清手机壁纸，美女帅哥图库，头像、表情包', // 默认为小程序名称
 			path, // 默认为当前页面路径
 			imageUrl: '', // 默认为当前页面的截图
 		}
@@ -121,12 +129,42 @@ export default {
 				})
 			})
 		},
-		
-		
-		onImg(item) {
+
+
+		onImg(item, index) {
+			console.log('item---', item);
+			// 导航到详情页
 			uni.navigateTo({
-				url: `/pages/imgDetails/imgDetails?id=${item.id}&categoryId=${item.categoryId}&url=${item.url}`
-			})
+				// url: `/pages/detail/detail?id=2&index=${2}`,
+				url: `/pages/imgDetails/imgDetails?id=${item.id}&categoryId=${item.categoryId}&url=${item.url}&tags_id=${item.tagsId}`,
+				// animationType: 'none' // 禁用默认动画，使用自定义动画getImgList
+			});
+			// 获取当前图片元素的位置和大小信息
+			// const query = uni.createSelectorQuery();
+			// console.log('query---', query);
+			// query.select(`#image-${index}`).boundingClientRect(rect => {
+			// 	if (!rect) return;
+
+			// 	// 保存图片信息到全局状态
+			// 	getApp().globalData = getApp().globalData || {};
+			// 	getApp().globalData.sharedImageInfo = {
+			// 		id: item.id,
+			// 		rect: {
+			// 			width: rect.width,
+			// 			height: rect.height,
+			// 			left: rect.left,
+			// 			top: rect.top
+			// 		},
+			// 		url: item.url
+			// 	};
+
+			// 	// 导航到详情页
+			// 	uni.navigateTo({
+			// 		// url: `/pages/detail/detail?id=2&index=${2}`,
+			// 		url: `/pages/imgDetails/imgDetails?id=${item.id}&categoryId=${item.categoryId}&url=${item.url}&tags_id=${item.tags_id}`,
+			// 		// animationType: 'none' // 禁用默认动画，使用自定义动画getImgList
+			// 	});
+			// }).exec();
 		},
 		scrollTop() {
 			console.log('scrollTop---');

@@ -1,7 +1,6 @@
 <script>
 import { fetch } from './utils/fetch.js';
 import { getCodeLogin } from './utils/login.js';
-import myUtils from './utils/myUtils.js';
 import api from './api/api.js';
 
 
