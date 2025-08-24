@@ -1,7 +1,7 @@
 <template>
 	<view class="la-ball-spin">
-		<view class="loader-inner ball-clip-rotate"></view>
-		<!-- <image class="qz-loading" src="/static/img/qz-loading.gif"></image> -->
+		<!-- <view class="loader-inner ball-clip-rotate"></view> -->
+		<image class="qz-loading" src="/static/img/loading.gif"></image>
 	</view>
 </template>
 <script>
@@ -20,14 +20,14 @@
 <style lang="scss" scoped>
 	.la-ball-spin {
 		position: fixed !important;
-		top: 50%;
+		top: 60%;
 		left: 50%;
 		transform: translate(-50%, -50%);
 		z-index: 9999;
 
 		.qz-loading {
-			width: 130rpx;
-			height: 120rpx;
+			width: 200rpx;
+			height: 200rpx;
 		}
 	}
 

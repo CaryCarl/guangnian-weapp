@@ -3,7 +3,7 @@
 		<view  class="home-bj-top">
 			<image mode="widthFix" src="@/static/img/home-top.png"></image>
 		</view>
-		<Header-Title :title="current === 0?'小橘图库':'我的'"></Header-Title>
+		<Header-Title :title="current === 0?'私藏图库匣':'我的'"></Header-Title>
 
 		<Ball-Spin v-if="isLoading"></Ball-Spin>
 		<view class="home-main" :style="{marginTop: `calc(${menuButtonInfo.top}px + ${topRpx})`,

@@ -1,13 +1,16 @@
 <template>
 	<view class="img-page">
+		<image class="bj-image" src="~@/static/003.png" 
+		mode="aspectFill" />
+
 		<Header-Title :back="true" :title="current === 0 ? '' : ''"></Header-Title>
 		<Ball-Spin v-if="spinState"></Ball-Spin>
 		<swiper v-if="imageList.length > 0" class="swiper" :indicator-dots="false" :autoplay="false" :circular="false"
 			@change="onSwiperChange">
 			<swiper-item v-for="(item, i) in imageList" :key="i">
 				<image v-if="item.is_webp == 1" class="swiper-image" :src="item.url + '?imageMogr2/format/webp'"
-					mode="aspectFill" />
-				<image v-else class="swiper-image" :src="item.url" mode="aspectFill" />
+					mode="aspectFit" />
+				<image v-else class="swiper-image" :src="item.url" mode="aspectFit" />
 			</swiper-item>
 		</swiper>
 
@@ -17,7 +20,7 @@
 		</view>
 
 		<view class="operate" v-if="imageList.length > 0">
-			<img @click="download" class="xiazai" src="/static/img/xiazai.png" alt="" srcset="" />
+			<!-- <img @click="download" class="xiazai" src="/static/img/xiazai.png" alt="" srcset="" /> -->
 			<view class="mt20 ">
 				<img v-if="imageList[currentIndex].collected" @click="toggleCollect(false)" class="shoucang"
 					src="/static/img/shoucang-ac.png" alt="" srcset="" />

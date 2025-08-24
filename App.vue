@@ -17,8 +17,8 @@ export default {
         }
 		
         let xcxInfo = {
-            name: "小橘图库",
-            appid: "wx65ede331cd1aadbc",
+            name: "私藏图库匣",
+            appid: "wxd1a72e6d2c6c4afe",
         };
         this.$store.commit('setXcxInfo', xcxInfo);
         // 用户登录

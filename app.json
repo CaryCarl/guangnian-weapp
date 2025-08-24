@@ -1,6 +1,6 @@
 {
 	"pages": [
-		"pages/index/index",
+		"pages/resource/resource",
 		"pages/qrcode/qrcode"
 	],
 	"lazyCodeLoading": "requiredComponents",
@@ -20,18 +20,18 @@
 		"backgroundColor": "#ffffff",
 		"custom": true,
 		"list": [{
-			"pagePath": "pages/index/index",
-			"text": "首页",
+			"pagePath": "pages/resource/resource",
+			"text": "资源",
 			"selectedIconPath": "/static/tabbar/juchang-active.png",
 			"iconPath": "/static/tabbar/juchang.png"
 		},{
 			"pagePath": "pages/imgDetails/imgDetails",
-			"text": "发现",
+			"text": "图库",
 			"selectedIconPath": "/static/tabbar/faxian-active.png",
 			"iconPath": "/static/tabbar/faxian.png"
 		}, {
 			"pagePath": "pages/qrcode/qrcode",
-			"text": "发现",
+			"text": "分类",
 			"selectedIconPath": "/static/tabbar/faxian-active.png",
 			"iconPath": "/static/tabbar/faxian.png"
 		}, {

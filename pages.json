@@ -2,10 +2,20 @@
 	"easycom": {
 		"^u-(.*)": "uview-ui/components/u-$1/u-$1.vue"
 	},
-	"pages": [{
+	"pages": [
+		{
+			"path": "pages/resource/resource",
+			"style": {
+				"navigationBarTitleText": "免费资源",
+				"enablePullDownRefresh": false,
+				"onReachBottomDistance": 150,
+				"navigationStyle": "custom"
+			}
+		},
+		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "首页",
+				"navigationBarTitleText": "图库",
 				"enablePullDownRefresh": false,
 				"onReachBottomDistance": 150,
 				"navigationStyle": "custom",
@@ -13,15 +23,8 @@
 				"componentFramework": "glass-easel",
 				"disableScroll": true
 			}
-		},{
-			"path": "pages/qrcode/qrcode",
-			"style": {
-				"navigationBarTitleText": "发现",
-				"enablePullDownRefresh": false,
-				"onReachBottomDistance": 150,
-				"navigationStyle": "custom"
-			}
-		}, {
+		},
+		{
 			"path": "pages/type/type",
 			"style": {
 				"navigationBarTitleText": "分类",
@@ -29,7 +32,8 @@
 				"onReachBottomDistance": 150,
 				"navigationStyle": "custom"
 			}
-		},  {
+		},
+		{
 			"path": "pages/my/my",
 			"style": {
 				"navigationBarTitleText": "我的",
@@ -38,10 +42,9 @@
 			}
 		},
 		{
-			"path" : "pages/imgDetails/imgDetails",
-			"style" : 
-			{
-				"navigationBarTitleText" : "",
+			"path": "pages/imgDetails/imgDetails",
+			"style": {
+				"navigationBarTitleText": "",
 				"navigationStyle": "custom",
 				"renderer": "skyline",
 				"componentFramework": "glass-easel",
@@ -49,24 +52,31 @@
 			}
 		},
 		{
-			"path" : "pages/collect/collect",
-			"style" : 
-			{
-				"navigationBarTitleText" : "收藏"
+			"path": "pages/collect/collect",
+			"style": {
+				"navigationBarTitleText": "收藏"
 			}
 		},
 		{
-			"path" : "pages/my/about/about",
-			"style" : 
-			{
-				"navigationBarTitleText" : "更新日志"
+			"path": "pages/my/about/about",
+			"style": {
+				"navigationBarTitleText": "更新日志"
 			}
 		},
 		{
-			"path" : "pages/detail/detail",
-			"style" : 
-			{
-				"navigationBarTitleText" : "",
+			"path": "pages/detail/detail",
+			"style": {
+				"navigationBarTitleText": "",
+				"renderer": "skyline",
+				"componentFramework": "glass-easel",
+				"disableScroll": true
+			}
+		},
+		{
+			"path": "pages/resource/details/details",
+			"style": {
+				"navigationBarTitleText": "",
+				"navigationStyle": "custom",
 				"renderer": "skyline",
 				"componentFramework": "glass-easel",
 				"disableScroll": true
@@ -87,21 +97,31 @@
 		"selectedColor": "#f05b47",
 		"backgroundColor": "#ffffff",
 		"custom": false,
-		"list": [{
-			"pagePath": "pages/index/index",
-			"text": "首页",
-			"selectedIconPath": "/static/tabbar/home-active.png",
-			"iconPath": "/static/tabbar/home.png"
-		}, {
-			"pagePath": "pages/type/type",
-			"text": "分类",
-			"selectedIconPath": "/static/tabbar/guige-active.png",
-			"iconPath": "/static/tabbar/guige.png"
-		},{
-			"pagePath": "pages/my/my",
-			"text": "我的",
-			"selectedIconPath": "/static/tabbar/my-active.png",
-			"iconPath": "/static/tabbar/my.png"
-		}]
+		"list": [
+			{
+				"pagePath": "pages/resource/resource",
+				"text": "资源",
+				"selectedIconPath": "/static/tabbar/home-active.png",
+				"iconPath": "/static/tabbar/home.png"
+			},
+			{
+				"pagePath": "pages/index/index",
+				"text": "图库",
+				"selectedIconPath": "/static/tabbar/faxian-active.png",
+				"iconPath": "/static/tabbar/faxian.png"
+			},
+			{
+				"pagePath": "pages/type/type",
+				"text": "分类",
+				"selectedIconPath": "/static/tabbar/guige-active.png",
+				"iconPath": "/static/tabbar/guige.png"
+			},
+			{
+				"pagePath": "pages/my/my",
+				"text": "我的",
+				"selectedIconPath": "/static/tabbar/my-active.png",
+				"iconPath": "/static/tabbar/my.png"
+			}
+		]
 	}
 }

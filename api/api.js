@@ -20,9 +20,21 @@ const removeFavorite = '/api/imageFavorites/removeFavorite'	//用户收藏
 const getUserFavorites = '/api/imageFavorites/getUserFavorites'	//用户收藏列表
 
 
+// --------资源-----------
+let resourceIP = "https://qsywebapi.juzishu.cn"
+const getCategoryList = resourceIP + '/api/resource/get_category_list'	//获取一级菜单
+const getSubcategoryList = resourceIP + '/api/resource/get_subcategory_list'	//获取二级菜单列表
+const getMaterialList = resourceIP + '/api/resource/get_material_list_simple'	//获取资料列表
+const getMaterialDetail = resourceIP + '/api/resource/get_material_detail'	//获取资料详情
+
 
 
 module.exports = {
+	getCategoryList,
+	getSubcategoryList,
+	getMaterialList,
+	getMaterialDetail,
+	
 	getPreviousImage,
 	getUserFavorites,
 	removeFavorite,
