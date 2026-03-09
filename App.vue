@@ -12,12 +12,13 @@ export default {
                 openId: options?.query?.openId,
                 completeId: options?.query?.completeId
             };
+			
             uni.setStorageSync('inviteInfoLogin', inv);
             this.$store.commit('setInviteInfoLogin', inv); //存储邀请者信息用于登录
         }
 		
         let xcxInfo = {
-            name: "私藏图库匣",
+            name: "光年视觉",
             appid: "wxd1a72e6d2c6c4afe",
         };
         this.$store.commit('setXcxInfo', xcxInfo);

@@ -158,7 +158,6 @@ export default {
 			}
 		},
 		goDetail(item) {
-			console.log('item', item);
 			uni.navigateTo({
 				url: `/pages/resource/details/details?id=${item.id}`
 			})

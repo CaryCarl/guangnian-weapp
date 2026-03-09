@@ -128,8 +128,9 @@ export default {
 				status: 1,
 			}
 			fetch(this.$api.getImageType, data, 'get').then((res) => {
-				let list = res?.data?.data || []
+				let list = (res?.data?.data || []).filter(item => item.status === 1);
 				this.typeList = list
+				
 				fetch(this.$api.getImageTags, 'get').then((res) => {
 					let temp = res?.data?.data || []
 					let tagList = []

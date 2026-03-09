@@ -9,7 +9,7 @@
 		<view class="home-content" :style="{ marginTop: `calc(${menuButtonInfo.top}px + ${topRpx})` }">
 			<view class="type-list">
 				<view v-for="(item, index) in typeList" :key="index" class="type-item" @click="clickType(item)" :style="{
-					color: typeId === item.id ? '#fa4d4c' : '#000000',
+					color: typeId === item.id ? '#1890ff' : '#000000',
 					fontWeight: typeId === item.id ? 'bold' : 'normal'
 				}">
 					{{ item.name }}
@@ -29,10 +29,6 @@
 						<img v-if="resourceList.length === 0" src="@/static/img/data-no.png"
 						style="width:35%;margin-top: 100rpx;" mode="widthFix"></img>
 					</view>
-
-					
-
-
 					<u-list @scrolltolower="scrolltolower">
 						<u-list-item v-for="(item, index) in resourceList" :key="index">
 							<view class="resource-item-container">
@@ -52,9 +48,7 @@
 										</view>
 									</view>
 								</view>
-
 							</view>
-
 						</u-list-item>
 						<view style="height: 320rpx; width: 100%;">
 						</view>

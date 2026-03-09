@@ -8,20 +8,30 @@
 			</view>
 
 			<view class="list mt32">
-				<view class="list-item" @click="change()">
-					<text>收藏</text>
-					<image class="left-img mr32" src="@/static/img/you.png" />
+				<view class="list-item" @click="change('img-collect')">
+					<view class="list-item-left-box">
+						<image class="left-img mr32" src="@/static/img/img.png" />
+						<text>壁纸收藏</text>
+					</view>
+					<image class="right-img mr32" src="@/static/img/you.png" />
+				</view>
+
+				<view class="list-item" @click="change('resource-collect')">
+					<view class="list-item-left-box">
+						<image class="left-img mr32" src="@/static/img/ziyuan.png" />
+						<text>资源收藏</text>
+					</view>
+					<image class="right-img mr32" src="@/static/img/you.png" />
 				</view>
 			</view>
 			<!-- <view class="list mt32">
 				<view class="list-item" @click="changeMd()">
 					<text>更新日志</text>
-					<image class="left-img mr32" src="@/static/img/you.png" />
+					<image class="right-img mr32" src="@/static/img/you.png" />
 				</view>
 			</view> -->
-			
-			<view class="mt50 f28 " style="text-align: center; opacity: .75;">免费分享资源</view>
-			<view class="mt50 f28 " style="text-align: center; opacity: .75;">努力更新中...</view>
+
+			<view class="mt50 f28 " style="text-align: center; opacity: .75;">更新中...</view>
 		</view>
 	</view>
 </template>

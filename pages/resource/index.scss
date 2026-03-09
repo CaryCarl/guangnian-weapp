@@ -31,10 +31,11 @@
 		z-index: 999;
 
 		.type-list {
+			margin-top: 168rpx;
 			display: flex;
 			flex-direction: column;
 			justify-content: flex-start;
-			width: 150rpx;
+			width: 140rpx;
 			height: 100%;
 			z-index: 999;
 
@@ -47,7 +48,7 @@
 		}
 
 		.home-main {
-			width: calc(100% - 150rpx);
+			width: calc(100% - 140rpx);
 			height: 100%;
 
 			.ch-tabs {

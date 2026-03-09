@@ -1,5 +1,5 @@
-// const baseUrl = 'http://192.168.5.22:3080';
-const baseUrl = 'https://v1.juzishu.cn';
+// const baseUrl = 'http://192.168.5.25:3002';
+const baseUrl = 'https://qsywebapi.juzishu.cn';
 
 import store from '../store'
 

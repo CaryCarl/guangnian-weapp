@@ -47,7 +47,6 @@ export default {
 				pageNumber: 1,
 				pageSize: 100
 			}, 'post').then((res) => {
-				console.log('用户收藏---', res);
 				if (res?.data?.code === 200) {
 					let temp = res?.data?.data || []
 					try {

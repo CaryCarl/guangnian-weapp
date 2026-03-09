@@ -41,7 +41,15 @@
 				display: flex;
 				align-items: center;
 				justify-content: space-between;
+				.list-item-left-box {
+					display: flex;
+					align-items: center;
+				}
 				.left-img {
+					width: 40rpx;
+					height: 40rpx;
+				}
+				.right-img {
 					margin-right: 20rpx;
 					width: 40rpx;
 					height: 40rpx;

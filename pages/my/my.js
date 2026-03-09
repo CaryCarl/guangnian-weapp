@@ -28,9 +28,9 @@ export default {
 	},
 	methods: {
 		
-		change() {
+		change(type) {
 			uni.navigateTo({
-				url:"/pages/collect/collect"
+				url:"/pages/collect/" + type
 			})
 		},
 		

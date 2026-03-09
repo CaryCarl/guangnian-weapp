@@ -52,9 +52,15 @@
 			}
 		},
 		{
-			"path": "pages/collect/collect",
+			"path": "pages/collect/img-collect",
 			"style": {
-				"navigationBarTitleText": "收藏"
+				"navigationBarTitleText": "壁纸收藏"
+			}
+		},
+		{
+			"path": "pages/collect/resource-collect",
+			"style": {
+				"navigationBarTitleText": "资源列表"
 			}
 		},
 		{
