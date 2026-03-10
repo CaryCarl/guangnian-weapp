@@ -1,3 +1,7 @@
+---
+
+---
+
 # 📦 [光年视觉]
 
 > 一个简洁、高效的微信小程序资源分享平台。致力于帮助用户快速发现、分享和管理优质学习/工具资源。
@@ -36,10 +40,22 @@
 * **UI 组件库**：[uView]
 * **后端支持**：[Node.js + MySQL]
 
-## 🚀 本地运行指南
 
-如果你想在本地运行或参与开发本项目，请按照以下步骤操作：
 
-**1. 克隆项目到本地**
+## 🚀 关联仓库
 
-**2. 在HBuilder编辑器进行开发**
+
+
+**1. 前端后台管理代码仓库**：https://github.com/CaryCarl/guangnian-web
+
+**2. 后端接口服务代码仓库**: https://github.com/CaryCarl/guangnian-server
+
+
+
+<p align="center">
+  <img src="https://www.bestcyt.com/img/web1.png" width="200" style="margin-right: 20px;">
+  <img src="https://www.bestcyt.com/img/web2.png" width="200" style="margin-right: 20px;">
+    <img src="https://www.bestcyt.com/img/web3.png" width="200" style="margin-right: 20px;">
+    <img src="https://www.bestcyt.com/img/web4.png" width="200" style="margin-right: 20px;">
+    <img src="https://www.bestcyt.com/img/web5.png" width="200" style="margin-right: 20px;">
+</p>
