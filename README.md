@@ -48,7 +48,7 @@
 
 **1. 前端后台管理代码仓库**：https://github.com/CaryCarl/guangnian-web
 
-**2. 后端接口服务代码仓库：**https://github.com/CaryCarl/guangnian-server
+**2. 后端接口服务代码仓库**: https://github.com/CaryCarl/guangnian-server
 
 
 
